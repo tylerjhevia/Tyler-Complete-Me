@@ -18,7 +18,7 @@ export default class Trie {
         currentNode = currentNode.children[wordArray[i]];
         }
     }
-    console.log(JSON.stringify(this.root, null, 4));
+    // console.log(JSON.stringify(this.root, null, 4));
     if (currentNode.isWord === false) {
         this.counter++;
         currentNode.isWord = true;
@@ -37,12 +37,16 @@ export default class Trie {
     for (let i = 0; i < stringArray.length; i++) {
       currentNode = currentNode.children[stringArray[i]];
     }
+    console.log(currentNode.children);
     // while (currentNode) {
     //   let keys = Object.keys(currentNode.children);
     //   for (let i = 0; i < keys.length; i++) {
     //     if (currentNode.children[keys[i]].isWord === true) {
-    //       suggestList.push(currentNode.fullWord);
+    //       suggestList.push(currentNode.children[keys[i]].fullWord);
+    //     } else {
+    //       currentNode = currentNode.children[keys[i]];
     //     }
+    //     currentNode = currentNode.children[keys[i]];
     //   }
     // }
     // follow search string down trie

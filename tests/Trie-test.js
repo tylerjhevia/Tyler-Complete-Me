@@ -131,7 +131,7 @@ describe('Trie functionality', () => {
       completeMe = new Trie();
     })
 
-    it.only('should return all children words of suggestion', () => {
+    it('should return all children words of suggestion', () => {
       completeMe.insert('apple');
       completeMe.insert('applesauce');
       completeMe.insert('apply');
