@@ -15,7 +15,7 @@ describe('Trie functionality', () => {
     })
 
     it('should have a root', () => {
-      expect(completeMe.root).to.equal(null);
+      expect(completeMe.root.children).to.deep.equal({});
     })
 
     it('should be able to insert a word and root should be a Node', () => {
@@ -65,7 +65,7 @@ describe('Trie functionality', () => {
     it('should be able to insert multiple words and children objects should have multiple props', () => {
       completeMe.insert('apple');
       completeMe.insert('ape');
-
+      console.log('root: ', completeMe.root);
       let childKeys = Object.keys(
         completeMe.root
         .children.a
@@ -112,6 +112,8 @@ describe('Trie functionality', () => {
     })
 
     it('should return number of words inserted', () => {
+      let completeMe = new Trie();
+
       expect(completeMe.count()).to.equal(0);
 
       completeMe.insert('ape');
@@ -129,7 +131,7 @@ describe('Trie functionality', () => {
       completeMe = new Trie();
     })
 
-    it('should return all children words of suggestion', () => {
+    it.only('should return all children words of suggestion', () => {
       completeMe.insert('apple');
       completeMe.insert('applesauce');
       completeMe.insert('apply');
@@ -149,7 +151,7 @@ describe('Trie functionality', () => {
       completeMe = new Trie();
     })
 
-    it('should be able to select order of words returned by suggest', () => {
+    it.skip('should be able to select order of words returned by suggest', () => {
       completeMe.insert('app')
       completeMe.insert('apple')
       completeMe.insert('applesauce')
