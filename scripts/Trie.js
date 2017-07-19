@@ -22,7 +22,6 @@ export default class Trie {
     if (currentNode.isWord === false) {
         this.counter++;
         currentNode.isWord = true;
-        currentNode.fullWord = word;
     }
   }
 
@@ -35,43 +34,59 @@ export default class Trie {
     let currentNode = this.root;
     let suggestionsArray = [];
 
+    // go through trie until you get to the node that represents the last letter of the search string
     for (let i = 0; i < stringArray.length; i++) {
       currentNode = currentNode.children[stringArray[i]]
-      //console.log('CURR NODE:', currNode);
     }
 
-    // currNode now refers to the last leter in our word
     const traverseTheTrie = (string, currentNode) => {
       let keys = Object.keys(currentNode.children);
       for (let k = 0; k < keys.length; k++) {
-        // console.log('CURRENT NODE:', currNode, 'KEYS:', keys);
         const child = currentNode.children[keys[k]];
         let newString = string + child.letter;
         if (child.isWord) {
-          suggestionsArray.push(newString);
+          suggestionsArray.push({name: newString, selectCount: child.selectCount, timestamp: child.timestamp});
         }
-        traverseTheTrie(newString, child);
+        traverseTheTrie(newString,child);
       }
     }
 
     if (currentNode && currentNode.isWord) {
-      suggestionsArray.push(string)
+      suggestionsArray.push({name: string, selectCount: currentNode.selectCount, timestamp: currentNode.timestamp});
     }
 
     if (currentNode) {
       traverseTheTrie(string, currentNode);
     }
-
-    //console.log('suggestionsArray:', suggestionsArray);
-    return suggestionsArray;
+    suggestionsArray.sort((a, b) => {
+      return b.timestamp - a.timestamp;
+      // b.selectCount - a.selectCount ||
+    });
+    return suggestionsArray.map((obj) => {
+      return obj.name;
+    })
   }
 
-  // populate(dictionary) {
-    // for (let i = 0; i < dictionary.length; i++) {
-    //   this.insert(dictionary[i]);
-    // }
-    // console.log(dictionary);
-  // }
+  select(word) {
+    let wordArray = [...word];
+    let currentNode = this.root;
+
+    for (let i = 0; i < wordArray.length; i++) {
+      currentNode = currentNode.children[wordArray[i]];
+    }
+    currentNode.selectCount++;
+    currentNode.timestamp = Date.now();
+  }
+
+  sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+      if ((new Date().getTime() - start) > milliseconds){
+        break;
+      }
+    }
+  }
+
   populate(dictionary) {
     dictionary.forEach(word => {
       this.insert(word);

@@ -1,0 +1,56 @@
+* {
+  font-family: 'Rasa', serif;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-image: url("https://media.giphy.com/media/lfxm47k9RPM0E/source.gif");
+  background-size: cover;
+}
+
+section {
+  display: flex;
+  height: 20vh;
+  width: 100%;
+}
+
+.header {
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  color: #FCEF8A;
+  font-size: 60px;
+  stroke: 2px solid black;
+}
+
+.main {
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: flex-start;
+}
+
+.word-input {
+  font-size: 25px;
+  height: 30px;
+  margin-bottom: 50px;
+  outline-color: #FCEF8A;
+  width: 80vh;
+}
+
+.select-button {
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  height: 30px;
+  outline: none;
+  width: 30%;
+}
+
+.select-button:hover {
+  background-color: #FCEF8A;
+}
