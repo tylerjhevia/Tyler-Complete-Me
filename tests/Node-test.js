@@ -9,24 +9,28 @@ describe('Node functionality', () => {
     node = new Node();
   })
 
-  it.skip('should have a letter property that defaults to null', () => {
+  it('should have a letter property that defaults to null', () => {
     expect(node.letter).to.deep.equal(null);
   })
 
-  it.skip('should accept an argument for letter', () => {
+  it('should accept an argument for letter', () => {
     let newNode = new Node('a');
     expect(newNode.letter).to.deep.equal('a');
   })
 
-  it.skip('should have an isWord property that starts as false', () => {
+  it('should have an isWord property that starts as false', () => {
     expect(node.isWord).to.deep.equal(false);
   })
 
-  it.skip('should have a fullWord property that starts as null', () => {
-    expect(node.fullWord).to.deep.equal(null);
+  it('should have a selectCount property that starts at 0', () => {
+    expect(node.selectCount).to.deep.equal(0);
   })
 
-  it.skip('should have a children property that starts as an empty object', () => {
+  it('should have a timestamp property that starts at 0', () => {
+    expect(node.timestamp).to.deep.equal(0);
+  })
+
+  it('should have a children property that starts as an empty object', () => {
     expect(node.children).to.deep.equal({});
   })
 

@@ -4,5 +4,6 @@ export default class Node {
     this.isWord = false;
     this.children = {};
     this.selectCount = 0;
+    this.timestamp = 0;
   }
 }
