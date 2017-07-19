@@ -22,7 +22,6 @@ export default class Trie {
     if (currentNode.isWord === false) {
         this.counter++;
         currentNode.isWord = true;
-        currentNode.fullWord = word;
     }
   }
 
@@ -37,14 +36,12 @@ export default class Trie {
 
     for (let i = 0; i < stringArray.length; i++) {
       currentNode = currentNode.children[stringArray[i]]
-      //console.log('CURR NODE:', currNode);
     }
 
     // currNode now refers to the last leter in our word
     const traverseTheTrie = (string, currentNode) => {
       let keys = Object.keys(currentNode.children);
       for (let k = 0; k < keys.length; k++) {
-        // console.log('CURRENT NODE:', currNode, 'KEYS:', keys);
         const child = currentNode.children[keys[k]];
         let newString = string + child.letter;
         if (child.isWord) {
@@ -62,16 +59,19 @@ export default class Trie {
       traverseTheTrie(string, currentNode);
     }
 
-    //console.log('suggestionsArray:', suggestionsArray);
     return suggestionsArray;
   }
 
-  // populate(dictionary) {
-    // for (let i = 0; i < dictionary.length; i++) {
-    //   this.insert(dictionary[i]);
-    // }
-    // console.log(dictionary);
-  // }
+  select(word) {
+    let wordArray = [...word];
+    let currentNode = this.root;
+
+    for (let i = 0; i < wordArray.length; i++) {
+      currentNode = currentNode.children[wordArray[i]];
+    }
+    currentNode.selectCount++;
+  }
+
   populate(dictionary) {
     dictionary.forEach(word => {
       this.insert(word);

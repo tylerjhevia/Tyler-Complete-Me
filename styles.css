@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-image: url("https://media.giphy.com/media/lfxm47k9RPM0E/source.gif");
+}
+
+section {
+  display: flex;
+  height: 20vh;
+  width: 100%;
+}
+
+.header {
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  color: #FCEF8A;
+  font-size: 60px;
+  stroke: 2px solid black;
+}
+
+.main {
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+
+.word-input {
+  height: 30px;
+  margin-bottom: 50px;
+  width: 80vh;
+}
+
+.select-button {
+  height: 30px;
+  width: 30%;
+}
