@@ -65,7 +65,6 @@ describe('Trie functionality', () => {
     it('should be able to insert multiple words and children objects should have multiple props', () => {
       completeMe.insert('apple');
       completeMe.insert('ape');
-      console.log('root: ', completeMe.root);
       let childKeys = Object.keys(
         completeMe.root
         .children.a
@@ -171,5 +170,21 @@ describe('Trie functionality', () => {
       expect(suggestions).to.deep.equal([ 'apple', 'apply', 'app', 'applesauce' ])
     })
   })
+
+  describe('dictionary populate', () => {
+   let completeMe;
+   const dictionary = fs.readFileSync(text).toString().trim().split('\n');
+
+
+   beforeEach(function () {
+      this.timeout(10000);
+      completeMe = new Trie();
+      completeMe.populate(dictionary);
+    });
+
+   it('should have lots of words after dictionary is populated', () => {
+     expect(completeMe.counter).to.equal(234371);
+   })
+ })
 
 })

@@ -30,29 +30,51 @@ export default class Trie {
     return this.counter;
   }
 
-  suggest (string) {
-    let stringArray = [...string.toLowerCase()];
+  suggest(string) {
+    let stringArray = [...string];
     let currentNode = this.root;
-    let suggestList = [];
+    let suggestionsArray = [];
+
     for (let i = 0; i < stringArray.length; i++) {
-      currentNode = currentNode.children[stringArray[i]];
+      currentNode = currentNode.children[stringArray[i]]
+      //console.log('CURR NODE:', currNode);
     }
-    console.log(currentNode.children);
-    // while (currentNode) {
-    //   let keys = Object.keys(currentNode.children);
-    //   for (let i = 0; i < keys.length; i++) {
-    //     if (currentNode.children[keys[i]].isWord === true) {
-    //       suggestList.push(currentNode.children[keys[i]].fullWord);
-    //     } else {
-    //       currentNode = currentNode.children[keys[i]];
-    //     }
-    //     currentNode = currentNode.children[keys[i]];
-    //   }
+
+    // currNode now refers to the last leter in our word
+    const traverseTheTrie = (string, currentNode) => {
+      let keys = Object.keys(currentNode.children);
+      for (let k = 0; k < keys.length; k++) {
+        // console.log('CURRENT NODE:', currNode, 'KEYS:', keys);
+        const child = currentNode.children[keys[k]];
+        let newString = string + child.letter;
+        if (child.isWord) {
+          suggestionsArray.push(newString);
+        }
+        traverseTheTrie(newString, child);
+      }
+    }
+
+    if (currentNode && currentNode.isWord) {
+      suggestionsArray.push(string)
+    }
+
+    if (currentNode) {
+      traverseTheTrie(string, currentNode);
+    }
+
+    //console.log('suggestionsArray:', suggestionsArray);
+    return suggestionsArray;
+  }
+
+  // populate(dictionary) {
+    // for (let i = 0; i < dictionary.length; i++) {
+    //   this.insert(dictionary[i]);
     // }
-    // follow search string down trie
-    // search through children
-    // for every child with isWord === true, add child.actualWord to array
-    //
-    return suggestList;
+    // console.log(dictionary);
+  // }
+  populate(dictionary) {
+    dictionary.forEach(word => {
+      this.insert(word);
+    });
   }
 }
