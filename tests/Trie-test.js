@@ -14,7 +14,7 @@ describe('Trie functionality', () => {
       completeMe = new Trie();
     })
 
-    it('should have a root', () => {
+    it('should have a root that starts as an empty object', () => {
       expect(completeMe.root.children).to.deep.equal({});
     })
 

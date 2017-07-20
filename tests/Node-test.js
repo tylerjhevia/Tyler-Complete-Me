@@ -30,16 +30,7 @@ describe('Node functionality', () => {
     expect(node.timestamp).to.deep.equal(0);
   })
 
-  // it('should have an updated timestamp after select method has been called on it', () => {
-  //   let trie = new
-  //   expect(node.timeStamp).to.deep.equal(0);
-  // })
-
   it('should have a children property that starts as an empty object', () => {
     expect(node.children).to.deep.equal({});
-  })
-
-  it('should be able to have multiple children', () => {
-    
   })
 })

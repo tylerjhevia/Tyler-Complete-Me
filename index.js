@@ -15,7 +15,7 @@ function appendSuggestions() {
   let suggestions = trie.suggest(string);
   for (let i = 0; i < 20 && i < suggestions.length; i++) {
     if(suggestions[i] !== undefined) {
-      suggestionList.append(`<li class='list-item'>${suggestions[i]}</li>`);
+      suggestionList.append(`<li class='.list-item'>${suggestions[i]}</li>`);
     }
   }
 }

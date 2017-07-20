@@ -7,7 +7,6 @@ export default class Trie {
   }
 
   insert (word) {
-
     let wordArray = [...word.toLowerCase()];
     let currentNode = this.root;
     for(let i = 0; i < wordArray.length; i++) {
@@ -18,10 +17,9 @@ export default class Trie {
         currentNode = currentNode.children[wordArray[i]];
         }
     }
-    // console.log(JSON.stringify(this.root, null, 4));
     if (currentNode.isWord === false) {
-        this.counter++;
-        currentNode.isWord = true;
+      this.counter++;
+      currentNode.isWord = true;
     }
   }
 
@@ -46,7 +44,7 @@ export default class Trie {
         if (child.isWord) {
           suggestionsArray.push({name: newString, selectCount: child.selectCount, timestamp: child.timestamp});
         }
-        searchTrie(newString,child);
+        searchTrie(newString, child);
       }
     }
 
@@ -58,7 +56,7 @@ export default class Trie {
       searchTrie(string, currentNode);
     }
     suggestionsArray.sort((a, b) => {
-      return b.selectCount - a.selectCount || b.timestamp - a.timestamp ;
+      return b.selectCount - a.selectCount || b.timestamp - a.timestamp;
     });
     return suggestionsArray.map((obj) => {
       return obj.name;
@@ -68,7 +66,6 @@ export default class Trie {
   select(word) {
     let wordArray = [...word];
     let currentNode = this.root;
-
     for (let i = 0; i < wordArray.length; i++) {
       currentNode = currentNode.children[wordArray[i]];
     }

@@ -119,19 +119,16 @@ trie.populate(_words2.default);
 function appendSuggestions() {
   var listArray = $('li');
   listArray.remove();
-  console.log('list Array', listArray);
   var string = wordInput.val().toLowerCase();
   var suggestions = trie.suggest(string);
   for (var i = 0; i < 20 && i < suggestions.length; i++) {
     if (suggestions[i] !== undefined) {
-      suggestionList.append('<li class=\'list-item\'>' + suggestions[i] + '</li>');
+      suggestionList.append('<li class=\'.list-item\'>' + suggestions[i] + '</li>');
     }
   }
 }
 
 function selectWord(event) {
-  console.log(event.target);
-  console.log(event.target.innerHTML);
   var selected = event.target.innerHTML;
   trie.select(selected);
   appendSuggestions();
@@ -188,7 +185,6 @@ var Trie = function () {
   _createClass(Trie, [{
     key: 'insert',
     value: function insert(word) {
-
       var wordArray = [].concat(_toConsumableArray(word.toLowerCase()));
       var currentNode = this.root;
       for (var i = 0; i < wordArray.length; i++) {
@@ -199,7 +195,6 @@ var Trie = function () {
           currentNode = currentNode.children[wordArray[i]];
         }
       }
-      // console.log(JSON.stringify(this.root, null, 4));
       if (currentNode.isWord === false) {
         this.counter++;
         currentNode.isWord = true;
@@ -252,7 +247,6 @@ var Trie = function () {
     value: function select(word) {
       var wordArray = [].concat(_toConsumableArray(word));
       var currentNode = this.root;
-
       for (var i = 0; i < wordArray.length; i++) {
         currentNode = currentNode.children[wordArray[i]];
       }
