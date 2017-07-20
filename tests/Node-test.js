@@ -33,6 +33,4 @@ describe('Node functionality', () => {
   it('should have a children property that starts as an empty object', () => {
     expect(node.children).to.deep.equal({});
   })
-
-
 })

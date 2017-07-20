@@ -54,3 +54,17 @@ section {
 .select-button:hover {
   background-color: #FCEF8A;
 }
+
+.word-list {
+  color: white;
+  margin-top: 20px;
+}
+
+li:hover {
+  background-color: #FCEF8A;
+  cursor: pointer;
+}
+
+li:active {
+  background-color: orange;
+}
