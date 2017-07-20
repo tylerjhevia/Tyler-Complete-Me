@@ -113,14 +113,10 @@ var wordInput = $('.word-input');
 var insertButton = $('.insert-button');
 var suggestionList = $('.word-list');
 
-wordInput.autocomplete = 'on';
-
 var trie = new _Trie2.default();
 trie.populate(_words2.default);
 
 function appendSuggestions() {
-  // let listArray = $('li');
-  // listArray.remove();
   clearList();
   var string = wordInput.val().toLowerCase();
   var suggestions = trie.suggest(string);
@@ -136,13 +132,6 @@ function insertWord() {
   trie.insert(word);
   clearList();
   wordInput.val('');
-}
-
-function enterToInsert(event) {
-  if (event.keyCode === 13) {
-    console.log('yo');
-    insertWord();
-  }
 }
 
 function selectWord(event) {
@@ -162,8 +151,6 @@ wordInput.on('input', function () {
     appendSuggestions();
   }
 });
-
-wordInput.on('input', enterToInsert);
 
 suggestionList.on('click', 'li', selectWord);
 
