@@ -110,21 +110,38 @@ var _words2 = _interopRequireDefault(_words);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var wordInput = $('.word-input');
-var clearButton = $('.clear-button');
+var insertButton = $('.insert-button');
 var suggestionList = $('.word-list');
+
+wordInput.autocomplete = 'on';
 
 var trie = new _Trie2.default();
 trie.populate(_words2.default);
 
 function appendSuggestions() {
-  var listArray = $('li');
-  listArray.remove();
+  // let listArray = $('li');
+  // listArray.remove();
+  clearList();
   var string = wordInput.val().toLowerCase();
   var suggestions = trie.suggest(string);
   for (var i = 0; i < 20 && i < suggestions.length; i++) {
     if (suggestions[i] !== undefined) {
       suggestionList.append('<li class=\'.list-item\'>' + suggestions[i] + '</li>');
     }
+  }
+}
+
+function insertWord() {
+  var word = wordInput.val();
+  trie.insert(word);
+  clearList();
+  wordInput.val('');
+}
+
+function enterToInsert(event) {
+  if (event.keyCode === 13) {
+    console.log('yo');
+    insertWord();
   }
 }
 
@@ -135,22 +152,22 @@ function selectWord(event) {
 }
 
 function clearList() {
-  event.preventDefault();
-  suggestionList.empty();
-  console.log('hey');
+  $('li').remove();
 }
 
 wordInput.on('input', function () {
   if (wordInput.val() === '') {
-    $('li').remove();
+    clearList();
   } else {
     appendSuggestions();
   }
 });
 
+wordInput.on('input', enterToInsert);
+
 suggestionList.on('click', 'li', selectWord);
 
-clearButton.on('click', clearList);
+insertButton.on('click', insertWord);
 
 /***/ }),
 /* 2 */

@@ -41,7 +41,7 @@ section {
   width: 80vh;
 }
 
-.clear-button {
+.insert-button {
   background-color: white;
   border: none;
   border-radius: 10px;
@@ -51,7 +51,7 @@ section {
   width: 30%;
 }
 
-.clear-button:hover {
+.insert-button:hover {
   background-color: #FCEF8A;
 }
 

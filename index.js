@@ -1,16 +1,16 @@
 import Node from './scripts/Node';
 import Trie from './scripts/Trie';
 import words from './scripts/words';
+
 const wordInput = $('.word-input');
-const clearButton = $('.clear-button');
+const insertButton = $('.insert-button');
 const suggestionList = $('.word-list');
 
 let trie = new Trie;
 trie.populate(words);
 
 function appendSuggestions() {
-  let listArray = $('li');
-  listArray.remove();
+  clearList();
   let string = wordInput.val().toLowerCase();
   let suggestions = trie.suggest(string);
   for (let i = 0; i < 20 && i < suggestions.length; i++) {
@@ -20,6 +20,13 @@ function appendSuggestions() {
   }
 }
 
+function insertWord() {
+  let word = wordInput.val();
+  trie.insert(word);
+  clearList();
+  wordInput.val('');
+}
+
 function selectWord(event) {
   let selected = event.target.innerHTML;
   trie.select(selected);
@@ -27,15 +34,12 @@ function selectWord(event) {
 }
 
 function clearList() {
-  event.preventDefault();
-  suggestionList.empty();
-  console.log('hey');
+  $('li').remove();
 }
-
 
 wordInput.on('input', function() {
   if (wordInput.val() === '') {
-    $('li').remove()
+    clearList();
   } else {
     appendSuggestions();
   }
@@ -43,4 +47,4 @@ wordInput.on('input', function() {
 
 suggestionList.on('click', 'li', selectWord);
 
-clearButton.on('click', clearList);
+insertButton.on('click', insertWord);
