@@ -41,7 +41,7 @@ section {
   width: 80vh;
 }
 
-.select-button {
+.clear-button {
   background-color: white;
   border: none;
   border-radius: 10px;
@@ -51,17 +51,19 @@ section {
   width: 30%;
 }
 
-.select-button:hover {
+.clear-button:hover {
   background-color: #FCEF8A;
 }
 
 .word-list {
   color: white;
+  list-style-type: circle;
   margin-top: 20px;
 }
 
 li:hover {
   background-color: #FCEF8A;
+  color: #0D7BCB;
   cursor: pointer;
 }
 

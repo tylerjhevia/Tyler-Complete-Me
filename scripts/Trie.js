@@ -38,7 +38,7 @@ export default class Trie {
       currentNode = currentNode.children[stringArray[i]]
     }
 
-    const traverseTheTrie = (string, currentNode) => {
+    const searchTrie = (string, currentNode) => {
       let keys = Object.keys(currentNode.children);
       for (let k = 0; k < keys.length; k++) {
         const child = currentNode.children[keys[k]];
@@ -46,7 +46,7 @@ export default class Trie {
         if (child.isWord) {
           suggestionsArray.push({name: newString, selectCount: child.selectCount, timestamp: child.timestamp});
         }
-        traverseTheTrie(newString,child);
+        searchTrie(newString,child);
       }
     }
 
@@ -55,7 +55,7 @@ export default class Trie {
     }
 
     if (currentNode) {
-      traverseTheTrie(string, currentNode);
+      searchTrie(string, currentNode);
     }
     suggestionsArray.sort((a, b) => {
       return b.selectCount - a.selectCount || b.timestamp - a.timestamp ;

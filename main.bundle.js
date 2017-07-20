@@ -110,7 +110,7 @@ var _words2 = _interopRequireDefault(_words);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var wordInput = $('.word-input');
-var selectButton = $('.select-button');
+var clearButton = $('.clear-button');
 var suggestionList = $('.word-list');
 
 var trie = new _Trie2.default();
@@ -137,8 +137,22 @@ function selectWord(event) {
   appendSuggestions();
 }
 
-wordInput.on('input', appendSuggestions);
+function clearList() {
+  event.preventDefault();
+  suggestionList.empty();
+}
+
+wordInput.on('input', function () {
+  if (wordInput.val() === '') {
+    $('li').remove();
+  } else {
+    appendSuggestions();
+  }
+});
+
 suggestionList.on('click', '.list-item', selectWord);
+
+clearButton.on('click', clearList);
 
 /***/ }),
 /* 2 */
@@ -207,7 +221,7 @@ var Trie = function () {
         currentNode = currentNode.children[stringArray[i]];
       }
 
-      var traverseTheTrie = function traverseTheTrie(string, currentNode) {
+      var searchTrie = function searchTrie(string, currentNode) {
         var keys = Object.keys(currentNode.children);
         for (var k = 0; k < keys.length; k++) {
           var child = currentNode.children[keys[k]];
@@ -215,7 +229,7 @@ var Trie = function () {
           if (child.isWord) {
             suggestionsArray.push({ name: newString, selectCount: child.selectCount, timestamp: child.timestamp });
           }
-          traverseTheTrie(newString, child);
+          searchTrie(newString, child);
         }
       };
 
@@ -224,7 +238,7 @@ var Trie = function () {
       }
 
       if (currentNode) {
-        traverseTheTrie(string, currentNode);
+        searchTrie(string, currentNode);
       }
       suggestionsArray.sort(function (a, b) {
         return b.selectCount - a.selectCount || b.timestamp - a.timestamp;
