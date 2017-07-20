@@ -29,7 +29,9 @@ function selectWord(event) {
 function clearList() {
   event.preventDefault();
   suggestionList.empty();
+  console.log('hey');
 }
+
 
 wordInput.on('input', function() {
   if (wordInput.val() === '') {
@@ -39,6 +41,6 @@ wordInput.on('input', function() {
   }
 });
 
-suggestionList.on('click','.list-item', selectWord);
+suggestionList.on('click', 'li', selectWord);
 
 clearButton.on('click', clearList);
