@@ -222,7 +222,6 @@ describe('Trie functionality', () => {
    let completeMe;
    const dictionary = fs.readFileSync(text).toString().trim().split('\n');
 
-
    beforeEach(function () {
       this.timeout(10000);
       completeMe = new Trie();
@@ -232,7 +231,6 @@ describe('Trie functionality', () => {
    it('should have lots of words after dictionary is populated', () => {
      expect(completeMe.counter).to.equal(234371);
    })
- })
-
-})
+  })
+  })
 })
