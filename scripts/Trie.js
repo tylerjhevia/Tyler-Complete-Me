@@ -34,7 +34,6 @@ export default class Trie {
     let currentNode = this.root;
     let suggestionsArray = [];
 
-    // go through trie until you get to the node that represents the last letter of the search string
     for (let i = 0; i < stringArray.length; i++) {
       currentNode = currentNode.children[stringArray[i]]
     }
@@ -59,8 +58,7 @@ export default class Trie {
       traverseTheTrie(string, currentNode);
     }
     suggestionsArray.sort((a, b) => {
-      return b.timestamp - a.timestamp;
-      // b.selectCount - a.selectCount ||
+      return b.selectCount - a.selectCount || b.timestamp - a.timestamp ;
     });
     return suggestionsArray.map((obj) => {
       return obj.name;
